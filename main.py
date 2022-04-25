@@ -2,6 +2,9 @@ import pandas as pd
 
 import memory
 import access
+import hexToBinary
+import getbits
+import getset
 
 ################################### LOGIC TO TAKE INPUT #####################################################
 class cacheInput:
@@ -18,42 +21,47 @@ class cacheInput:
         self.read_write = read_write
         self.address = address
 
-cacheInput = cacheInput
+# Defining Objects
+cacheInputObj = cacheInput
+memoryObj = memory.memory()
+accessObj = access.Access()
+hexToBinaryObj = hexToBinary.HextoBinary
+getbitsObj = getbits.Getbits
+getsetObj = getset.GetSet
 
 # Read Trace file
 file = pd.read_csv("sampleTrace.txt", sep=" ", header=None, 
                  names=["Read/Write", "Address"])
 
-cacheInput.read_write = file.loc[:,"Read/Write"]
-cacheInput.address = file.loc[:,"Address"]
+cacheInputObj.read_write = file.loc[:,"Read/Write"]
+cacheInputObj.address = file.loc[:,"Address"]
 
 # Take input
 print("Input the required values")
 
 print("Input total cache size")
-cacheInput.cacheSize = int(input())
+cacheInputObj.cacheSize = int(input())
 
 print("Input total block size")
-cacheInput.blockSize = int(input())
+cacheInputObj.blockSize = int(input())
 
 print("Input Associativity, 0 => Fully Associative, 1 => Direct mapped, value(2^n) => set associative")
-cacheInput.Associativity = int(input())
+cacheInputObj.Associativity = int(input())
 
 print("Input replacement policy: LRU, LFU, FIFO, RAND")
-cacheInput.repPolicy = str(input())
+cacheInputObj.repPolicy = str(input())
 
 print("\n")
 #################### CALLING FUNCTIONS #######################
-memory = memory.memory()
-access = access.Access()
 
 
-cacheByte = memory.getCacheSize(cacheInput.cacheSize)
-blockByte = memory.getBlockSize(cacheInput.blockSize)
-associatityString = memory.cacheType(cacheInput.Associativity)
-replacementPolicy = memory.repPolicy(cacheInput.repPolicy)
 
-totalAccess = access.Access(cacheInput.read_write)
+cacheByte = memoryObj.getCacheSize(cacheInputObj.cacheSize)
+blockByte = memoryObj.getBlockSize(cacheInputObj.blockSize)
+associatityString = memoryObj.cacheType(cacheInputObj.Associativity)
+replacementPolicy = memoryObj.repPolicy(cacheInputObj.repPolicy)
+
+totalAccess = accessObj.Access(cacheInputObj.read_write)
 # print(totalAccess[0])
 # print(totalAccess[1])
 # print(totalAccess[2])
@@ -66,3 +74,39 @@ print(cacheByte)
 print(blockByte)
 print(associatityString)
 print(replacementPolicy)
+
+# converting address to binary
+addrBinary = []
+for item in cacheInputObj.address:
+    addrBinary.append(hexToBinaryObj.hextobinary(item))
+
+print(addrBinary)
+
+# get set
+sets = int(getsetObj.getset(cacheByte, blockByte, cacheInputObj.Associativity))
+print("sets: ")
+print(sets)
+
+# getting bits to binary
+indexBits = []
+tagBits = []
+offsetBits = []
+for item in addrBinary:
+    indexBits.append(getbitsObj.index_bits(item, cacheInputObj.blockSize, sets))
+    tagBits.append(getbitsObj.tag_bits(item, cacheInputObj.blockSize, sets))
+    offsetBits.append(getbitsObj.offset_bits(item, cacheInputObj.blockSize))
+
+
+print("\n Index bit array")
+print("\n")
+print(indexBits)
+print("\n")
+print(tagBits)
+print("\n")
+print(offsetBits)
+
+# checking output
+print("\n")
+print(cacheInputObj.read_write)
+print("\n")
+print(cacheInputObj.address)

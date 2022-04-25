@@ -6,6 +6,7 @@ class Getbits:
     # n_block = 
     def offset_bits(binary, n_block):
         mask = (1<<n_block)-1
+        binary = int(binary)
         offset = binary & mask
         return offset
 
@@ -22,10 +23,10 @@ class Getbits:
         binary = int(binary,2)
         return binary
 
-getbitsObj = Getbits
-binary = 101010101011000
-offset = getbitsObj.offset_bits(binary,4)
-index = getbitsObj.index_bits(binary,4,3)
+# getbitsObj = Getbits
+# binary = 101010101011000
+# offset = getbitsObj.offset_bits(binary,4)
+# index = getbitsObj.index_bits(binary,4,3)
 
-print(offset)
-print(index)
+# print(offset)
+# print(index)
