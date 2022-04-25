@@ -89,6 +89,7 @@ print(sets)
 
 # getting bits to binary
 indexBits = []
+# doubt in tag bits, should it be dependent on ways? if yes then how should i implement it
 tagBits = []
 offsetBits = []
 for item in addrBinary:
