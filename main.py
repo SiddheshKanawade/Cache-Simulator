@@ -1,10 +1,14 @@
 import pandas as pd
+import math
 
 import memory
 import access
 import hexToBinary
 import getbits
 import getset
+import hitmiss
+import dataarray
+import tagarray
 
 ################################### LOGIC TO TAKE INPUT #####################################################
 class cacheInput:
@@ -28,6 +32,9 @@ accessObj = access.Access()
 hexToBinaryObj = hexToBinary.HextoBinary
 getbitsObj = getbits.Getbits
 getsetObj = getset.GetSet
+hitmissObj = hitmiss.HitMiss
+dataarrayObj = dataarray.DataArray
+tagarrayObj = tagarray.TagArray
 
 # Read Trace file
 file = pd.read_csv("sampleTrace.txt", sep=" ", header=None, 
@@ -70,44 +77,55 @@ readAccess = totalAccess[0]
 writeAccess = totalAccess[1]
 cacheAccess = totalAccess[2]
 
-print(cacheByte)
-print(blockByte)
-print(associatityString)
-print(replacementPolicy)
+
 
 # converting address to binary
 addrBinary = []
 for item in cacheInputObj.address:
     addrBinary.append(hexToBinaryObj.hextobinary(item))
 
-print(addrBinary)
+
 
 # get set
 sets = int(getsetObj.getset(cacheByte, blockByte, cacheInputObj.Associativity))
-print("sets: ")
-print(sets)
+
 
 # getting bits to binary
 indexBits = []
-# doubt in tag bits, should it be dependent on ways? if yes then how should i implement it
 tagBits = []
 offsetBits = []
+logsets = int(math.log(sets, 2))
 for item in addrBinary:
-    indexBits.append(getbitsObj.index_bits(item, cacheInputObj.blockSize, sets))
-    tagBits.append(getbitsObj.tag_bits(item, cacheInputObj.blockSize, sets))
+    indexBits.append(getbitsObj.index_bits(item, cacheInputObj.blockSize, logsets))
+    tagBits.append(getbitsObj.tag_bits(item, cacheInputObj.blockSize, logsets))
     offsetBits.append(getbitsObj.offset_bits(item, cacheInputObj.blockSize))
 
 
-print("\n Index bit array")
-print("\n")
-print(indexBits)
-print("\n")
-print(tagBits)
-print("\n")
-print(offsetBits)
+# Calling datastore and tagstore
+dataStore = dataarrayObj.dataarray(sets, cacheInputObj.Associativity, cacheByte)
+tagStore = tagarrayObj.tagArray(sets)
+taglist = tagStore[0]
+# print(type(taglist))
+if(cacheInputObj.repPolicy == "FIFO"):
+    (cache_miss, compulsory_miss, capacity_miss, conflict_miss, read_miss, write_miss, dirty_blocks_evicted) = hitmissObj.fifo(tagBits,cacheInputObj.read_write, indexBits, offsetBits, cacheInputObj.Associativity, sets, cacheByte, cacheInputObj.address)
+else:
+    (cache_miss, compulsory_miss, capacity_miss, conflict_miss, read_miss, write_miss, dirty_blocks_evicted) = hitmissObj.lru(tagBits,cacheInputObj.read_write, indexBits, offsetBits, cacheInputObj.Associativity, sets, cacheByte, cacheInputObj.address)
 
-# checking output
+############################### OUTPUT ######################################3
 print("\n")
-print(cacheInputObj.read_write)
-print("\n")
-print(cacheInputObj.address)
+print(cacheByte)
+print(blockByte)
+print(associatityString)
+print(replacementPolicy)
+print("Access data")
+print("Read Access: ", readAccess)
+print("Write Access: ", writeAccess)
+print("Cache Access: ", cacheAccess)
+
+print("CacheMiss = ", cache_miss)
+print("CompulsoryMiss = ", compulsory_miss)
+print("CapacityMiss = ", capacity_miss)
+print("ConflictMiss = ", conflict_miss)
+print("Read Miss = ", read_miss)
+print("Write_miss = ", write_miss)
+print("Dirty blocks evicted =", dirty_blocks_evicted)

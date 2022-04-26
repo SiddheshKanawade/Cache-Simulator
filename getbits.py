@@ -24,9 +24,10 @@ class Getbits:
         return binary
 
 # getbitsObj = Getbits
-# binary = 101010101011000
+# binary = "00010000000000101111110110110100"
 # offset = getbitsObj.offset_bits(binary,4)
-# index = getbitsObj.index_bits(binary,4,3)
-
+# index = getbitsObj.index_bits(binary,4,2)
+# tag = getbitsObj.tag_bits(binary, 4, 2)
 # print(offset)
 # print(index)
+# print(tag)

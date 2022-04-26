@@ -1,44 +1,32 @@
-# A complete working Python
-# program to demonstrate all
-# insertion methods
- 
-# A linked list node
+from mimetypes import types_map
+
+
 class Node:
  
-    # Constructor to create a new node
     def __init__(self, data):
         self.data = data
         self.next = None
         self.prev = None
  
-# Class to create a Doubly Linked List
+
 class DoublyLinkedList:
- 
-    # Constructor for empty Doubly Linked List
+
     def __init__(self):
         self.head = None
  
-    # Given a reference to the head of a list and an
-    # integer, inserts a new node on the front of list
+  
     def push(self, new_data):
  
-        # 1. Allocates node
-        # 2. Put the data in it
+
         new_node = Node(new_data)
- 
-        # 3. Make next of new node as head and
-        # previous as None (already None)
+
         new_node.next = self.head
- 
-        # 4. change prev of head node to new_node
+
         if self.head is not None:
             self.head.prev = new_node
- 
-        # 5. move the head to point to the new node
+
         self.head = new_node
  
-    # Given a node as prev_node, insert a new node after
-    # the given node
     
     def pop(self):
         if(self.head == None):
@@ -70,8 +58,6 @@ class DoublyLinkedList:
         self.head = temp
         return capacity
 
-    # This function prints contents of linked list
-    # starting from the given node
     def printList(self):
  
         print("\nTraversal in forward direction")
@@ -89,27 +75,64 @@ class DoublyLinkedList:
         #     print(" {}".format(last.data))
         #     last = last.prev
         self.head = temp
- 
-# Driver program to test above functions
- 
- 
-# Start with empty list
-llist = DoublyLinkedList()
- 
+    
+    def search(self, tagAddr):
+        if(self.head == None):
+            return [None,-1]
+        temp = self.head
+        pos_tagAddr_inLL = 0
+        while(temp):
+            if(temp.data == tagAddr):
+                
+                return (temp, pos_tagAddr_inLL)
+            temp = temp.next
+            pos_tagAddr_inLL = pos_tagAddr_inLL + 1
+        
+        # if not present in LL
+        return [None, -1]
 
-# So linked list becomes 7->6->None
- 
+    # assumed that tagaddr is present
+    def replaceNode(self, searchArray):
+        i = 0
+        # call only when element is present
+        temp = self.head
+        while (i < searchArray[1]):
+            self.head = self.head.next
+            i = i + 1
+        if(self.head.prev == None):
+            return
+        
+        x = self.head.data
+        self.head.prev.next = self.head.next
+        
+        
+        
+        if (self.head.next != None):
+            self.head.next.prev = self.head.prev
+            self.head.next = None
+        
+        self.head.prev = None
+        self.head = temp
+        self.push(x)
+        
 
-for i in range(10):
-    llist.push(i)
-print("\n")
-print(llist.maxCapacity())
-print("\n")
-for i in range(10):
-    llist.pop()
- 
+
+# llist = DoublyLinkedList()
+
+# for i in range(10):
+#     llist.push(i)
+# print("\n")
+# print(llist.maxCapacity())
+# print("Original LL")
+# llist.printList()
+
+# searhArr = llist.search(5)
+# print(searhArr[1])
+# llist.replaceNode(searhArr)
 
  
-print ("Created DLL is: ")
-llist.printList()
+# print ("Created DLL is: ")
+# llist.printList()
+
+
  

@@ -1,0 +1,23 @@
+class DataImplementation:
+    
+    @staticmethod
+    def get_type_and_addr(index, byte_offset, tag, address):
+        #lines = [line.rstrip('/n') for line in open(filepath)]
+        # store address and one or 
+        type_and_addr=[]
+        tag_in_binary=[]
+        index_in_binary=[]
+        access_type=[]
+        i=0
+        for line in address:
+            type_and_addr.append(line.split(" "))                              
+            if(len(type_and_addr[i][1])<9):                                 
+                access_type.append(type_and_addr[i][0])
+                type_and_addr[i][1]= int(type_and_addr[i][1],16)                     
+                addr_in_binary = f'{type_and_addr[i][1]:0>32b}'                         
+                type_and_addr[i][1]= addr_in_binary
+                tag_in_binary.append((int(addr_in_binary,2) >>(index+byte_offset)))
+                addr_in_binary= addr_in_binary[tag : tag+index] 
+                index_in_binary.append((int(addr_in_binary,2)))
+            i+=1
+        return index_in_binary,tag_in_binary, access_type
