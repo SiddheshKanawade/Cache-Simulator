@@ -50,10 +50,10 @@ cacheInputObj.cacheSize = int(input())
 print("Input total block size")
 cacheInputObj.blockSize = int(input())
 
-print("Input Associativity, 0 => Fully Associative, 1 => Direct mapped, value(2^n) => set associative")
+print("Input Associativity, 1 => Direct mapped, value(2^n) => set associative")
 cacheInputObj.Associativity = int(input())
 
-print("Input replacement policy: LRU, LFU, FIFO, RAND")
+print("Input replacement policy: LRU, FIFO")
 cacheInputObj.repPolicy = str(input())
 
 print("\n")
@@ -103,7 +103,6 @@ for item in addrBinary:
 dataStore = dataarrayObj.dataarray(sets, cacheInputObj.Associativity, cacheByte)
 tagStore = tagarrayObj.tagArray(sets)
 taglist = tagStore[0]
-# print(type(taglist))
 if(cacheInputObj.repPolicy == "FIFO"):
     (cache_miss, compulsory_miss, capacity_miss, conflict_miss, read_miss, write_miss, dirty_blocks_evicted) = hitmissObj.fifo(tagBits,cacheInputObj.read_write, indexBits, offsetBits, cacheInputObj.Associativity, sets, cacheByte, cacheInputObj.address)
 else:
