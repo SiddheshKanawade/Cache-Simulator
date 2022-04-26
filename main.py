@@ -13,9 +13,7 @@ import tagarray
 ################################### LOGIC TO TAKE INPUT #####################################################
 class cacheInput:
     LRU = "LRU"
-    LFU = "LFU"
     FIFO = "FIFO"
-    RAND = "RAND"
 
     def __init__(self, cacheSize, blockSize, Associativity, repPolicy, read_write, address):
         self.cacheSize = cacheSize
@@ -129,3 +127,22 @@ print("ConflictMiss = ", conflict_miss)
 print("Read Miss = ", read_miss)
 print("Write_miss = ", write_miss)
 print("Dirty blocks evicted =", dirty_blocks_evicted)
+
+############################# OUTPUT FILE ##########################################3
+file = open("output.txt", "w+")
+file.write("Cache Size in Bytes: " + str(cacheByte) + "\n"
+            "Block Size in Bytes: " + str(blockByte) + "\n"
+            "Associativity: " + str(associatityString) + "\n"
+            "Replacement Policy: " + str(replacementPolicy) + "\n"
+            "Access Data" + "\n"
+            "Read Access: " + str(readAccess) + "\n"
+            "Write Access: " + str(writeAccess) + "\n"
+            "Cache Access: " + str(cacheAccess) + "\n"
+            "Miss" + "\n"
+            "Compulsory Miss: " + str(compulsory_miss) + "\n"
+            "Conflict Miss: " + str(conflict_miss) + "\n"
+            "Capacity Miss: " + str(capacity_miss) + "\n"
+            "Read Miss: " + str(read_miss) + "\n"
+            "Write Miss: " + str(write_miss) + "\n"
+            "Dirty Blocks evicted: " + str(dirty_blocks_evicted) + "\n")
+file.close()
