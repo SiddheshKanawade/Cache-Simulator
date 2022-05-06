@@ -1,0 +1,70 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<style>
+    supplementary {
+        padding: 10px;
+    }
+</style>
+
+<body>
+
+    <section>
+        <div class="file_input_form">
+            <html>
+
+            <body>
+                <!-- This example requires Tailwind CSS v2.0+ -->
+                <section class="text-gray-600 body-font">
+                    <div class="container px-5 py-24 mx-auto">
+                        <div class="flex flex-col text-center w-full mb-12">
+                            <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Cache Simulator</h1>
+                            <p class="lg:w-2/3 mx-auto leading-relaxed text-base">This is a <b>Cache simulator</b> developer as a Course project under <b>ES215: Computer Organisation and Architecture</b>. It is meant to demonstrate some of the different <b>replacement, and mapping policies</b> that the actual CPUs implement</p>
+                        </div>
+                        <div
+                            class="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
+                            <div class="relative flex-grow w-full">
+                                <form action="http://localhost:5000/login" method="post">
+                                    <label for="full-name" class="leading-7 text-sm text-gray-600">Cache Size(enter n of power of 2)</label>
+                                    <input type="number" id="cacheSize" name="cacheSize"
+                                        class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                    <p><br></p>
+                                    <label for="full-name" class="leading-7 text-sm text-gray-600">Block Size(enter n of power of 2)</label>
+                                    <input type="number" id="blockSize" name="blockSize"
+                                        class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                    <p><br></p>
+                                    <label for="full-name" class="leading-7 text-sm text-gray-600">Associativity(1 => Direct Mapped, 2**n => Set Associative)</label>
+                                    <input type="number" id="associativity" name="associativity"
+                                        class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                    <p><br></p>
+                                    <label for="full-name" class="leading-7 text-sm text-gray-600">Policy(LRU, FIFO)</label>
+                                    <input type="text" id="policy" name="policy"
+                                        class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-transparent focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                    <p><br></p>
+
+                                    <div class="supplementary">
+                                        <p><br></p>
+                                        <button
+                                            class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"><input
+                                                type="submit" value="submit" /></button>
+                                    </div>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+
+
+            </body>
+
+            </html>
+        </div>
+    </section>
+
+</body>
+
+</html>

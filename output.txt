@@ -1,5 +1,5 @@
-Cache Size in Bytes: 256
-Block Size in Bytes: 4
+Cache Size in Bytes: 1024
+Block Size in Bytes: 16
 Associativity: Set Associativity
 Replacement Policy: LRU
 Access Data
@@ -8,8 +8,8 @@ Write Access: 25097
 Cache Access: 81623
 Miss
 Compulsory Miss: 13834
-Conflict Miss: 4922
-Capacity Miss: 17584
-Read Miss: 23925
-Write Miss: 12415
-Dirty Blocks evicted: 419
+Conflict Miss: 14032
+Capacity Miss: 5673
+Read Miss: 21791
+Write Miss: 11748
+Dirty Blocks evicted: 124
