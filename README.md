@@ -1,5 +1,5 @@
 # Cache-Simulator
-This is a Cache simulator developer as a Course project under **ES215: Computer Organisation and Organisation**. It is meant to demonstrate some of the different replacement, and mapping policies that the actual CPUs implement. The trace file used in the project is project has its reference [here](https://occs.oberlin.edu/~ctaylor/classes/210SP13/cache.html)
+This is a Cache simulator developer as a Course project under **ES215: Computer Organisation and Organisation**. It demonstrates some of the different replacement, and mapping policies that the actual CPUs implement. The trace file used in the project is project has its reference [here](https://occs.oberlin.edu/~ctaylor/classes/210SP13/cache.html)
 
 ## Input
 - `CacheSize` (in bytes) input the power of 2.
