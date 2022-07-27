@@ -17,3 +17,6 @@ This is a Cache simulator developer as a Course project under **ES215: Computer 
 - To run this project in the local environment, you must have python and necessary libraries installed.
 - Use: `python3 main.py` to run the file in local environment after cloning the github repository.
 - Output file named as `output.txt` will be created.
+
+## Note
+- The project is now also hosted using Flask.
